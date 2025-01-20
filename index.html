@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+    <title>Carspotting</title>
+    <style>
+        @media (max-width: 768px) {
+    .blog-posts {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-detail img {
+        max-width: 100%;
+    }
+
+    .form-container {
+        width: 100%;
+    }
+}
+.form-container button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Zvětší tlačítko po najetí */
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #222;
+            color: white;
+        }
+
+        header {
+            background-color: #222;
+            padding: 20px 0;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        header:hover {
+            background-color: #333;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        header nav a:hover {
+            color: #a2a2ff;
+        }
+
+        /* Video na pozadí na celou obrazovku */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            transition: opacity 1.5s ease;
+        }
+
+        .hero .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin: 0;
+            color: #ffffff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s ease;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin: 20px 0;
+            color: #ffffff;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .button {
+            background-color: #8a4cff;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            margin: 10px;
+        }
+
+        .button:hover {
+            background-color: #5a2cc1;
+            transform: scale(1.05);
+        }
+
+        /* Sekce O nás */
+        #about-us {
+            background-color: #333;
+            padding: 50px 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 50px 0;
+            transition: transform 0.3s ease;
+        }
+
+        #about-us:hover {
+            transform: scale(1.05);
+        }
+
+        #about-us h2 {
+            color: #8a4cff;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        #about-us p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            text-align: justify;
+        }
+
+        /* Styl pro tabulky */
+        #service-table {
+            padding: 20px;
+            margin-top: 50px;
+            background-color: #333;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        #service-table:hover {
+            transform: scale(1.02);
+        }
+
+        #service-table h2 {
+            text-align: center;
+            color: #8a4cff;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        #service-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #444;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        #service-table table:hover {
+            transform: translateY(-5px);
+        }
+
+        #service-table th, #service-table td {
+            padding: 20px;
+            text-align: left;
+            border: 1px solid #555;
+            transition: background-color 0.3s, transform 0.3s ease;
+        }
+
+        #service-table th {
+            background-color: #8a4cff;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #service-table tr:nth-child(even) {
+            background-color: #555;
+        }
+
+        #service-table tr:hover {
+            background-color: #666;
+            transform: scale(1.02);
+        }
+
+        #service-table td .highlight {
+            font-weight: bold;
+            color: #8a4cff;
+        }
+
+        footer {
+            background-color: #222;
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        footer:hover {
+            background-color: #333;
+        }
+            /* Styl tabulky */
+    #range-of-services table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    #range-of-services th, #range-of-services td {
+        padding: 15px;
+        text-align: left;
+        border: 1px solid #444;
+    }
+
+    #range-of-services th {
+        background-color: #4a4a4a;
+        color: #fff;
+        text-transform: uppercase;
+    }
+
+    #range-of-services tr:nth-child(even) {
+        background-color: #2c2c2c;
+    }
+
+    #range-of-services tr:nth-child(odd) {
+        background-color: #1a1a1a;
+    }
+
+    #range-of-services tr:hover {
+        background-color: #5a5a5a;
+        transition: 0.3s ease-in-out;
+    }
+
+    #range-of-services td {
+        color: #eaeaea;
+    }
+
+    #range-of-services .price {
+        color: #d16be0;
+        font-weight: bold;
+    }
+
+    #range-of-services .category {
+        font-weight: bold;
+        color: #f1f1f1;
+        background-color: #333;
+    }
+    /* Styl tabulky */
+    #range-of-services {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Zajištění vertikálního zarovnání */
+        background-color: #121212; /* Tmavé pozadí sekce */
+        padding: 20px;
+    }
+    /* Styl sekce */
+    #range-of-services {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Celá obrazovka */
+        background-color: #121212; /* Tmavé pozadí */
+        padding: 20px; /* Odstup od okrajů */
+        box-sizing: border-box;
+    }
+
+    /* Styl tabulky */
+    #range-of-services table {
+        width: 80%; /* Šířka tabulky */
+        max-width: 1200px; /* Maximální šířka */
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        background-color: #1a1a1a; /* Tmavě šedé pozadí tabulky */
+        border-radius: 8px; /* Zaoblené rohy */
+        overflow: hidden; /* Přetečení eliminováno */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); /* Jemný stín */
+    }
+
+    #range-of-services th, #range-of-services td {
+        padding: 15px;
+        text-align: left;
+        border: 1px solid #444;
+    }
+
+    #range-of-services th {
+        background-color: #4a4a4a;
+        color: #fff;
+        text-transform: uppercase;
+    }
+
+    #range-of-services tr:nth-child(even) {
+        background-color: #2c2c2c;
+    }
+
+    #range-of-services tr:nth-child(odd) {
+        background-color: #1a1a1a;
+    }
+
+    #range-of-services tr:hover {
+        background-color: #5a5a5a;
+        transition: 0.3s ease-in-out;
+    }
+
+    #range-of-services td {
+        color: #eaeaea;
+    }
+
+    #range-of-services .price {
+        color: #d16be0;
+        font-weight: bold;
+    }
+
+    #range-of-services .category {
+        font-weight: bold;
+        color: #f1f1f1;
+        background-color: #333;
+        text-align: center; /* Centrování textu v kategoriích */
+    }
+
+    /* Nadpis sekce */
+    #range-of-services h2 {
+        color: #d16be0;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .service-detail {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-detail:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-detail h3 {
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.service-detail ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.service-detail img {
+    margin-top: 10px;
+    max-width: 100%;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.service-detail img:hover {
+    transform: scale(1.1);
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+</style>
+   
+</head>
+<section>
+
+    <header>
+        <nav>
+            <a href="#">Domů</a>
+            <a href="#">Galerie</a>
+            <a href="#">Příběhy</a>
+            <a href="#">Kontakt</a>
+            <a href="#">Blog</a>
+        </nav>
+    </header>
+</section>
+<style>
+    .video-container {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+    }
+    
+    .video-container video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -1;
+        object-fit: cover;
+    }
+    
+    .video-container .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .video-container h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+    
+    .video-container p {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+    
+    .video-container button {
+        font-size: 1rem;
+        padding: 10px 20px;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .video-container button:hover {
+        background-color: #0056b3;
+    }
+</style>    
+    <!-- Sekce s videem na pozadí -->
+    <section id="welcome">
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="img/video.mp4" type="video/mp4">
+                Váš prohlížeč nepodporuje video.
+            </video>
+            <div class="overlay">
+                <h1>Vítejte ve světě precizní vizuální tvorby</h1>
+                <p>Specialisté na focení a videoprodukci vozů</p>
+                <button>Objevte naše služby</button>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Sekce O nás -->
+    <section id="about-us">
+        <h2>O nás</h2>
+        <p>Jsme tým profesionálů zaměřený na zachycení krásy automobilů prostřednictvím unikátní fotografie a videa. Naším cílem je představit vozy ve všech jejich aspektech, od designu až po výkon, a přinést inspiraci našim klientům a fanouškům automobilového světa. Každý snímek a každé video je pro nás příležitost ukázat jedinečnost každého vozu a vyprávět příběh, který za ním stojí.</p>
+    </section>
+    <section id="gallery">
+        <h2>Galerie</h2>
+        <div class="gallery">
+            <img src="img/auto1.jpg" alt="Auto 1">
+            <img src="img/auto4.jpg" alt="Auto 2">
+            <img src="img/auto3.jpg" alt="Auto 3">
+            <img src="img/auto5.jpg" alt="Auto 4">
+            <img src="img/auto6.jpg" alt="Auto 5">
+        </div>
+    </section>
+    <style>
+    #gallery {
+        padding: 50px 20px;
+        background-color: #333;
+        text-align: center;
+        color: white;
+    }
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    .gallery img {
+        max-width: 200px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+        transform: scale(1.1);
+    }
+    #image-text {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #121212;
+    padding: 20px;
+    gap: 20px;
+}
+
+.image-text-block img {
+    width: 40%;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.text-form-container {
+    width: 55%;
+    color: white;
+    text-align: left;
+}
+
+.text-form-container p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-size: 1.2em;
+}
+
+#contact-form {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+
+#contact-form h2 {
+    color: #8a4cff;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+#contact-form .form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#contact-form input, 
+#contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    font-size: 1em;
+}
+
+#contact-form button {
+    background-color: #8a4cff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Styl pro image-text sekci */
+#image-text {
+    display: flex; /* Flexbox pro zarovnání prvků */
+    justify-content: space-between; /* Rozdělí obsah na dvě části */
+    align-items: center; /* Vertikální zarovnání */
+    margin: 20px 0; /* Mezery kolem sekce */
+}
+
+/* Styl pro blok s textem a obrázkem */
+.image-text-block {
+    flex: 1; /* Blok zabírá celou dostupnou šířku */
+    padding: 20px; /* Vnitřní okraje */
+    background-color: #f4f4f4; /* Světle šedé pozadí */
+    border-radius: 8px; /* Zaoblené rohy */
+    display: flex;
+    align-items: center; /* Vertikální zarovnání obsahu */
+}
+
+/* Obrázek uvnitř textového bloku */
+.image-text-block img {
+    max-width: 100%; /* Obrázek se přizpůsobí šířce bloku */
+    height: auto; /* Udrží správný poměr stran */
+    border-radius: 8px; /* Zaoblené rohy pro obrázek */
+    margin-right: 20px; /* Mezery mezi obrázkem a textem */
+}
+
+/* Styl pro text uvnitř bloku */
+.image-text-block p {
+    font-size: 18px; /* Velikost písma */
+    line-height: 1.6; /* Výška řádků pro lepší čitelnost */
+    color: #333; /* Tmavší text pro lepší kontrast */
+}
+
+/* Styl pro kontakt sekci */
+#contact-form {
+    margin-top: 30px; /* Mezery nad kontaktním formulářem */
+    padding: 20px; /* Vnitřní okraje */
+    background-color: #fff; /* Bílé pozadí */
+    border-radius: 8px; /* Zaoblené rohy */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Stín pro lepší vzhled */
+}
+
+/* Nadpis kontaktního formuláře */
+#contact-form h2 {
+    font-size: 24px; /* Velikost písma pro nadpis */
+    color: #4b4b4b; /* Tmavší barva pro nadpis */
+    margin-bottom: 15px; /* Mezery pod nadpisem */
+}
+
+/* Styl pro formulář */
+.form-container form {
+    display: flex;
+    flex-direction: column; /* Svislé uspořádání formulářových prvků */
+}
+
+/* Styl pro jednotlivé vstupní prvky */
+.form-container input, .form-container textarea {
+    margin-bottom: 10px; /* Mezery mezi prvky */
+    padding: 10px; /* Vnitřní okraje */
+    font-size: 16px; /* Velikost písma */
+    border: 1px solid #ccc; /* Světle šedý rámeček */
+    border-radius: 4px; /* Zaoblené rohy */
+}
+
+.form-container button {
+    padding: 10px 20px; /* Vnitřní okraje pro tlačítko */
+    background-color: #007bff; /* Modrá barva tlačítka */
+    color: white; /* Bílý text */
+    font-size: 16px; /* Velikost písma */
+    border: none; /* Žádný rámeček */
+    border-radius: 4px; /* Zaoblené rohy */
+    cursor: pointer; /* Ukazatel myši na tlačítko */
+    transition: background-color 0.3s ease; /* Plynulá změna barvy */
+}
+
+/* Hover efekt pro tlačítko */
+.form-container button:hover {
+    background-color: #0056b3; /* Tmavší modrá po najetí */
+}
+
+/* Styl pro textarea */
+.form-container textarea {
+    resize: vertical; /* Umožní vertikální zvětšení velikosti textového pole */
+    min-height: 120px; /* Minimální výška textového pole */
+}
+</style>
+    
+    <!-- Sekce s popisem služeb -->
+   
+<section id="range-of-services">
+    <div>
+        <h2>Ceník služeb</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Služba</th>
+                    <th>Popis</th>
+                    <th>Cena</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category">
+                    <td colspan="3">Profesionální fotografování automobilů</td>
+                </tr>
+                <tr>
+                    <td>Exteriér a interiér</td>
+                    <td>Focení detailů i celkových pohledů na vůz v jeho přirozeném prostředí.</td>
+                    <td class="price">od 5 000 Kč</td>
+                </tr>
+                <tr>
+                    <td>Lifestyle fotografie</td>
+                    <td>Zachycení automobilu v akci nebo ve stylovém prostředí pro jedinečný dojem.</td>
+                    <td class="price">od 7 000 Kč</td>
+                </tr>
+                <tr>
+                    <td>Studiové fotografie</td>
+                    <td>Precizní fotografie vozu v profesionálně osvětleném studiu.</td>
+                    <td class="price">od 6 000 Kč</td>
+                </tr>
+                <tr>
+                    <td>360° fotografie</td>
+                    <td>Kompletní prohlídka vozu s interaktivními záběry.</td>
+                    <td class="price">od 8 000 Kč</td>
+                </tr>
+                <tr class="category">
+                    <td colspan="3">Videoprodukce</td>
+                </tr>
+                <tr>
+                    <td>Reklamní videa</td>
+                    <td>Krátká a poutavá videa, která perfektně prezentují váš vůz.</td>
+                    <td class="price">od 12 000 Kč</td>
+                </tr>
+                <tr>
+                    <td>Prezentační videa</td>
+                    <td>Detailní záběry kombinované s dynamickými přechody pro jedinečný styl.</td>
+                    <td class="price">od 10 000 Kč</td>
+                </tr>
+                <tr>
+                    <td>Akční záběry</td>
+                    <td>Natáčení automobilu v pohybu, například na okruhu nebo v přírodě.</td>
+                    <td class="price">od 15 000 Kč</td>
+                </tr>
+                <tr>
+                    <td>Videotesty</td>
+                    <td>Obsah zaměřený na testování vozu s profesionálními komentáři.</td>
+                    <td class="price">od 9 000 Kč</td>
+                </tr>
+                <tr>
+                    <td>Videa z dronu</td>
+                    <td>Působivé záběry z ptačí perspektivy pro váš projekt.</td>
+                    <td class="price">od 8 500 Kč</td>
+                </tr>
+                <tr class="category">
+                    <td colspan="3">Carspotting služby</td>
+                </tr>
+                <tr>
+                    <td>Organizace eventů</td>
+                    <td>Komplexní zajištění akcí pro carspotting nadšence.</td>
+                    <td class="price">od 20 000 Kč</td>
+                </tr>
+                <tr>
+                    <td>Tracking vozu při jízdě</td>
+                    <td>Dynamické sledování vozu během pohybu, ideální pro videa.</td>
+                    <td class="price">od 7 500 Kč</td>
+                </tr>
+                <tr>
+                    <td>Carspotting průvodce</td>
+                    <td>Praktické tipy a triky pro úspěšný carspotting.</td>
+                    <td class="price">od 3 500 Kč</td>
+                </tr>
+                <tr class="category">
+                    <td colspan="3">Postprodukční služby</td>
+                </tr>
+                <tr>
+                    <td>Retuše fotografií</td>
+                    <td>Úpravy fotografií pro dokonalý vizuální výsledek.</td>
+                    <td class="price">od 2 000 Kč</td>
+                </tr>
+                <tr>
+                    <td>Editace videa</td>
+                    <td>Střih a efekty pro profesionální video.</td>
+                    <td class="price">od 3 500 Kč</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<section id="detail-sluzby">
+    <h2 data-aos="fade-up">Naše služby</h2>
+
+    <article class="service-detail" data-aos="fade-right">
+        <h3>Focení luxusních vozů</h3>
+        <p>Profesionalita a preciznost pro váš projekt.</p>
+        <ul>
+            <li>Vysoká kvalita fotografií</li>
+            <li>Postprodukční úpravy</li>
+        </ul>
+        <img src="images/foceni-vozu.jpg" alt="Focení luxusních vozů">
+    </article>
+
+    <article class="service-detail" data-aos="fade-left">
+        <h3>Videoprodukce</h3>
+        <p>Dynamické video obsahy.</p>
+        <ul>
+            <li>Dronové záběry</li>
+            <li>Hudební podkres</li>
+        </ul>
+        <img src="images/videoprodukce.jpg" alt="Videoprodukce">
+    </article>
+
+    <article class="service-detail" data-aos="fade-right">
+        <h3>Produktová fotografie</h3>
+        <p>Detailní produktové záběry.</p>
+        <ul>
+            <li>Studio i exteriér</li>
+            <li>Profesionální retuše</li>
+        </ul>
+        <img src="images/produktova-fotografie.jpg" alt="Produktová fotografie">
+    </article>
+</section>
+
+<section id="blog" class="blog-section">
+    <h2>Blog</h2>
+    <div class="blog-posts">
+        <!-- Box 1: Příběhy o vozech -->
+        <div class="blog-post blog-box">
+            <div class="blog-box-content">
+                <h3>Jak vzniká profesionální fotografie</h3>
+                <p>Objevte zákulisí focení luxusních automobilů.</p>
+                <a href="#" class="blog-btn">Číst více</a>
+            </div>
+            <img src="images/fotografovani.jpg" alt="Fotografování auta" class="blog-img">
+        </div>
+        
+        <!-- Box 2: Tipy pro carspotting -->
+        <div class="blog-post blog-box">
+            <div class="blog-box-content">
+                <h3>Tipy na focení aut</h3>
+                <p>Vylepšete své fotografie s těmito jednoduchými triky.</p>
+                <a href="#" class="blog-btn">Číst více</a>
+            </div>
+            <img src="images/tipy-na-foceni.jpg" alt="Tipy na focení" class="blog-img">
+        </div>
+
+        <!-- Box 3: Akční příběhy automobilů -->
+        <div class="blog-post blog-box">
+            <div class="blog-box-content">
+                <h3>Příběhy aut na cestách</h3>
+                <p>Unikátní příběhy vozů zachycené naším týmem.</p>
+                <a href="#" class="blog-btn">Číst více</a>
+            </div>
+            <img src="images/pribehy-aut.jpg" alt="Příběhy o vozech" class="blog-img">
+        </div>
+
+        <!-- Box 4: Video produkce -->
+        <div class="blog-post blog-box">
+            <div class="blog-box-content">
+                <h3>Videoprodukce pro váš vůz</h3>
+                <p>Jak vytvořit poutavé video z vašeho vozu.</p>
+                <a href="#" class="blog-btn">Číst více</a>
+            </div>
+            <img src="images/videoprodukce.jpg" alt="Videoprodukce" class="blog-img">
+        </div>
+    </div>
+</section>
+
+<style>
+.blog-section {
+    padding: 50px 20px;
+    background-color: #222;
+    color: white;
+}
+
+.blog-section h2 {
+    text-align: center;
+    color: #8a4cff;
+    margin-bottom: 30px;
+}
+
+.blog-posts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.blog-post {
+    background-color: #333;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.blog-post:hover {
+    transform: scale(1.05);
+}
+
+.blog-box-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.blog-box-content h3 {
+    color: #f4eded;
+    margin-bottom: 15px;
+}
+
+.blog-box-content p {
+    font-size: 0.9em;
+    color: #bab9b9;
+    margin-bottom: 20px;
+}
+
+.blog-btn {
+    color: #8a4cff;
+    text-decoration: none;
+    font-size: 1em;
+    background-color: #222;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.blog-btn:hover {
+    background-color: #8a4cff;
+}
+
+.blog-img {
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+}
+
+.blog-post:hover .blog-img {
+    opacity: 0.7;
+}
+
+.blog-post:hover .blog-box-content {
+    transform: translateY(-10px);
+}
+</style>
+
+<section id="blog" class="blog-section">
+    <h2>Blog</h2>
+    <div class="blog-posts">
+        <div class="blog-post">
+            <h3>Jak vzniká profesionální fotografie</h3>
+            <p>Objevte zákulisí focení luxusních automobilů.</p>
+            <a href="#">Číst více</a>
+        </div>
+        <div class="blog-post">
+            <h3>Tipy na focení aut</h3>
+            <p>Vylepšete své fotografie s těmito jednoduchými triky.</p>
+            <a href="#">Číst více</a>
+        </div>
+        <div class="blog-post">
+            <h3>Příběhy aut na cestách</h3>
+            <p>Unikátní příběhy vozů zachycené naším týmem.</p>
+            <a href="#">Číst více</a>
+        </div>
+        <div class="blog-post">
+            <h3>Nejnovější technologie v autokamerách</h3>
+            <p>Jaké technologické novinky zlepšují kvalitu automobilových videí?</p>
+            <a href="#">Číst více</a>
+        </div>
+        <div class="blog-post">
+            <h3>Nejlepší auta pro carspotting</h3>
+            <p>Seznam vozů, které vám nesmí uniknout při carspottingu.</p>
+            <a href="#">Číst více</a>
+        </div>
+        <div class="blog-post">
+            <h3>Údržba vašeho vozu pro lepší vzhled na fotografiích</h3>
+            <p>Jak pečovat o vůz, aby byl vždy připraven na focení.</p>
+            <a href="#">Číst více</a>
+        </div>
+        <div class="blog-post">
+            <h3>Tipy na výběr správného místa pro focení</h3>
+            <p>Jak najít ideální lokaci pro vaše automobilové fotografie?</p>
+            <a href="#">Číst více</a>
+        </div>
+    </div>
+</section>
+
+
+<section id="image-text">
+    <div class="image-text-block">
+        <img src="img/auto8.jpg" alt="Ilustrační obrázek auta">
+        <p>Chcete, aby byl váš vůz zachycen profesionály? <br>Nabízíme služby, které se zaměřují na jedinečné a kvalitní fotografie i videa ,<br>vašich automobilů. Naše zkušenosti a vášeň pro automobily <br>zaručují skvělé výsledky, které budou trvalou vzpomínkou.</p>
+        <section id="contact-form">
+        <h2>Kontaktujte nás</h2>
+        <div class="form-container">
+            <form>
+                <input type="text" name="name" placeholder="Vaše jméno" required>
+                <input type="email" name="email" placeholder="Váš e-mail" required>
+                <textarea name="message" placeholder="Vaše zpráva" required></textarea>
+                <button type="submit">Odeslat</button>
+            </form>
+        </div>
+    </section>
+
+
+        
+</section>
+    <footer>
+        <p>&copy; 2024 Carspotting. Všechna práva vyhrazena.</p>
+    </footer>
+
+</body>
+</html>
